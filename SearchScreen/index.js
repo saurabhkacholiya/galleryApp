@@ -44,17 +44,18 @@ export default function SearchScreen() {
             axios.get(urlEndpoint)
                 .then(item => setResponse([...response,...item.data.photos.photo]))
                 .catch((error) => { console.log("error => ",error)})
-            
-            setRefreshing(!refreshing)
     
             if(searchTerm !== 'Random'){
-                setItem(searchTerm,response)
+                setItem(searchTerm,JSON.stringify(response))
             }
         }else{
-            getItem(searchTerm)
-            .then(item => setResponse(item))
-            .catch(error => console.log('error is ', error))
+            getItem("searchTerm")
+                .then(item => setResponse(item) )
+                .catch(error => console.log('error ', error))
         }
+        
+        setRefreshing(false)
+        
     })
   },[searchTerm,pageNo])
 
@@ -87,7 +88,7 @@ const changeColumn = () => {
 }
 
 const refreshPage = () => {
-    setRefreshing(!refreshing)
+    setRefreshing(true)
     setSearchTerm('happy_days')
     setPageNo(1)
 }
@@ -114,7 +115,7 @@ const refreshPage = () => {
         <FlatList 
             data={response}
             renderItem={({item}) => (
-                <View key={item.id} style={{margin:5}}>
+                <View key={`${item.id}_${item.secret}`} style={{margin:5}}>
                 <Image style={{
                     flex:1,
                     height:100,
@@ -125,7 +126,7 @@ const refreshPage = () => {
                 />
                 </View>
             )}
-            keyExtractor={(item) => `${item.id}_${item.title}`}
+            keyExtractor={(item) => `${item.id}_${item.title}_${item.secret}`}
             numColumns={numberOfColumn}
             onEndReached={() => setPageNo(pageNo+1)}
             onEndReachedThreshold={0.3}
