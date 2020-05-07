@@ -32,6 +32,7 @@ export default function SearchScreen() {
   const [numberOfColumn, setNumberOfColumn] = useState(3)
   const [searchTerm , setSearchTerm] = useState('Random')
   const [pageNo, setPageNo] = useState(1)
+  const [refreshing, setRefreshing] = useState(false)
 
   useEffect(() => {
     NetInfo.fetch().then(state => {
@@ -43,6 +44,8 @@ export default function SearchScreen() {
             axios.get(urlEndpoint)
                 .then(item => setResponse([...response,...item.data.photos.photo]))
                 .catch((error) => { console.log("error => ",error)})
+            
+            setRefreshing(!refreshing)
     
             if(searchTerm !== 'Random'){
                 setItem(searchTerm,response)
@@ -81,6 +84,12 @@ const changeColumn = () => {
     }else{
         setNumberOfColumn(numberOfColumn + 1)
     }
+}
+
+const refreshPage = () => {
+    setRefreshing(!refreshing)
+    setSearchTerm('happy_days')
+    setPageNo(1)
 }
   return (
     <SafeAreaView style={styles.safeAreaViewStyle}>
@@ -121,6 +130,8 @@ const changeColumn = () => {
             onEndReached={() => setPageNo(pageNo+1)}
             onEndReachedThreshold={0.3}
             key={numberOfColumn}
+            onRefresh={refreshPage}
+            refreshing={refreshing}
             />
         </View>
         
