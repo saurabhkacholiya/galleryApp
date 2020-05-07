@@ -35,7 +35,7 @@ export default function SearchScreen() {
     &nojsoncallback=true&per_page=20&extras=url_s&page=${pageNo}`;
 
     axios.get(urlEndpoint)
-    .then(response => console.log('responsse ', response.data.photos.photo))
+    .then(response => setResponse(response.data.photos.photo))
     .catch((error) => { console.log("error => ",error)})
 
   },[searchTerm,pageNo])
