@@ -1,7 +1,6 @@
 import React , { useEffect , useState} from 'react';
 import { 
   StyleSheet, 
-  Text, 
   View,
   Image,
   FlatList,
@@ -15,6 +14,11 @@ import {
     FontAwesome,
     Entypo,
 } from 'react-native-vector-icons';
+import { 
+    getItem, 
+    setItem, 
+} from "./asyncStorage";
+import NetInfo from '@react-native-community/netinfo';
 import { arr  } from "./constant";
 
 const ITEM_WIDTH = Dimensions.get('window').width;
@@ -26,21 +30,30 @@ const API_KEY = 'ddfc2122dc4634f03eec5673ea678f8a';
 export default function SearchScreen() {
   const [response, setResponse] = useState([])
   const [numberOfColumn, setNumberOfColumn] = useState(3)
-  const [searchTerm , setSearchTerm] = useState('love')
+  const [searchTerm , setSearchTerm] = useState('Random')
   const [pageNo, setPageNo] = useState(1)
-  const [gridStatus, setGridStatus] = useState(true)
 
   useEffect(() => {
-    if(gridStatus){
-        const urlEndpoint = `https://api.flickr.com/services/rest/?
-        method=flickr.photos.search&api_key=${API_KEY}&format=json&text=${searchTerm}
-        &nojsoncallback=true&per_page=20&extras=url_s&page=${pageNo}`;
-
-        axios.get(urlEndpoint)
-        .then(response => setResponse(response.data.photos.photo))
-        .catch((error) => { console.log("error => ",error)})
-    }
-  },[searchTerm,pageNo,gridStatus])
+    NetInfo.fetch().then(state => {
+        if(state.isConnected){
+            const urlEndpoint = `https://api.flickr.com/services/rest/?
+            method=flickr.photos.search&api_key=${API_KEY}&format=json&text=${searchTerm}
+            &nojsoncallback=true&per_page=20&extras=url_s&page=${pageNo}`;
+    
+            axios.get(urlEndpoint)
+                .then(item => setResponse([...response,...item.data.photos.photo]))
+                .catch((error) => { console.log("error => ",error)})
+    
+            if(searchTerm !== 'Random'){
+                setItem(searchTerm,response)
+            }
+        }else{
+            getItem(searchTerm)
+            .then(item => setResponse(item))
+            .catch(error => console.log('error is ', error))
+        }
+    })
+  },[searchTerm,pageNo])
 
 
 
@@ -55,19 +68,19 @@ const debounce = function (callback, delay) {
 }
 
 const setDataAfterTimeOut = (data) => {
+    setPageNo(1)
+    setResponse([])
     setSearchTerm(data)
 }
   
 const onChange = debounce(setDataAfterTimeOut, 300);
 
 const changeColumn = () => {
-    setGridStatus(false)
     if(numberOfColumn === 4){
         setNumberOfColumn(2)
     }else{
         setNumberOfColumn(numberOfColumn + 1)
     }
-    setGridStatus(true)
 }
   return (
     <SafeAreaView style={styles.safeAreaViewStyle}>
@@ -103,9 +116,10 @@ const changeColumn = () => {
                 />
                 </View>
             )}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => `${item.id}_${item.title}`}
             numColumns={numberOfColumn}
             onEndReached={() => setPageNo(pageNo+1)}
+            onEndReachedThreshold={0.3}
             key={numberOfColumn}
             />
         </View>
