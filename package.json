@@ -26,9 +26,5 @@
     "babel-preset-expo": "~8.1.0",
     "@babel/core": "^7.8.6"
   },
-  "android": {
-    "package": "com.gallery.app",
-    "versionCode": 1
-  },
   "private": true
 }
