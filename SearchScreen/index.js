@@ -28,17 +28,19 @@ export default function SearchScreen() {
   const [numberOfColumn, setNumberOfColumn] = useState(3)
   const [searchTerm , setSearchTerm] = useState('love')
   const [pageNo, setPageNo] = useState(1)
+  const [gridStatus, setGridStatus] = useState(true)
 
   useEffect(() => {
-    const urlEndpoint = `https://api.flickr.com/services/rest/?
-    method=flickr.photos.search&api_key=${API_KEY}&format=json&text=${searchTerm}
-    &nojsoncallback=true&per_page=20&extras=url_s&page=${pageNo}`;
+    if(gridStatus){
+        const urlEndpoint = `https://api.flickr.com/services/rest/?
+        method=flickr.photos.search&api_key=${API_KEY}&format=json&text=${searchTerm}
+        &nojsoncallback=true&per_page=20&extras=url_s&page=${pageNo}`;
 
-    axios.get(urlEndpoint)
-    .then(response => setResponse(response.data.photos.photo))
-    .catch((error) => { console.log("error => ",error)})
-
-  },[searchTerm,pageNo])
+        axios.get(urlEndpoint)
+        .then(response => setResponse(response.data.photos.photo))
+        .catch((error) => { console.log("error => ",error)})
+    }
+  },[searchTerm,pageNo,gridStatus])
 
 
 
@@ -59,11 +61,13 @@ const setDataAfterTimeOut = (data) => {
 const onChange = debounce(setDataAfterTimeOut, 300);
 
 const changeColumn = () => {
+    setGridStatus(false)
     if(numberOfColumn === 4){
         setNumberOfColumn(2)
     }else{
         setNumberOfColumn(numberOfColumn + 1)
     }
+    setGridStatus(true)
 }
   return (
     <SafeAreaView style={styles.safeAreaViewStyle}>
