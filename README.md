@@ -1,18 +1,17 @@
 # About
 > Basic gallery App build in react-native using expo
 ## Feature's
-1. Search Bar with debouncing so api will get call after user stop searching for 300ms
-2. Infinite scroll 
-3. Pull to Refresh
-4. Store data in AsyncStorage 
-5. Options to change the grid to 2,3,4 Columns
+- Search Bar with debouncing so api will get call after user stop searching for 300ms
+- Infinite scroll 
+- Pull to Refresh
+- Store data in AsyncStorage 
+- Options to change the grid to 2,3,4 Columns
 
-#- ![#f03c15] ISSUE `#f03c15`
+- ![#f03c15] ISSUE `#f03c15`
 > When using offline mode you have to ![#1589F0] ScrollDown To See the saved images`#1589F0`
 
-# #- ![#f03c15] ISSUE `#f03c15`
+- ![#f03c15] <p color="red">ISSUE<p> `#f03c15`
 > When using offline mode you have to ![#1589F0] ScrollDown To See the saved images`#1589F0`
-
 
 ## Prerequisite
 1. Node 
