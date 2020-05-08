@@ -11,13 +11,13 @@
 > When using offline mode you have to ScrollDown To See the saved images 
 
 ## Prerequisite
-1. Node 
-2. expo cli
+- Node 
+- expo cli
 
 ## Step to run the project
-1. clone the repo
-2. $ npm install
-3. $ expo start 
+- clone the repo
+- $ npm install
+- $ expo start 
 
 ## demo image
 <img src="Images/grid_2.jpeg" width="350" height="500">

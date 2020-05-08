@@ -55,7 +55,7 @@ export default function SearchScreen() {
                 .catch((error) => { console.log("error => ", error) })
         } else {
             getItem("searchTerm")
-                .then(item => setResponse(item))
+                .then(item => setResponse([...item]))
                 .catch(error => console.log('error ', error))
         }
 
@@ -140,6 +140,7 @@ export default function SearchScreen() {
                     key={numberOfColumn}
                     onRefresh={refreshPage}
                     refreshing={refreshing}
+                    extraData={response}
                 />
             </View>
 
