@@ -7,10 +7,6 @@
 - Store data in AsyncStorage 
 - Options to change the grid to 2,3,4 Columns
 
-### ISSUE
-> When using offline mode you have to ScrollDown To See the saved images because the flatlist is not getting re-render
-when click of grid chagne button offline data is visible 
-
 ## Prerequisite
 - Node 
 - expo cli
