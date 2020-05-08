@@ -42,12 +42,11 @@ export default function SearchScreen() {
             &nojsoncallback=true&per_page=20&extras=url_s&page=${pageNo}`;
     
             axios.get(urlEndpoint)
-                .then(item => setResponse([...response,...item.data.photos.photo]))
+                .then(item => {
+                    setResponse([...response,...item.data.photos.photo])
+                    setItem("searchTerm",JSON.stringify([...response,...item.data.photos.photo]))
+                })
                 .catch((error) => { console.log("error => ",error)})
-    
-            if(searchTerm !== 'Random'){
-                setItem(searchTerm,JSON.stringify(response))
-            }
         }else{
             getItem("searchTerm")
                 .then(item => setResponse(item) )
