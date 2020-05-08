@@ -39,7 +39,7 @@ export default function SearchScreen() {
         NetInfo.fetch().then(state => {
             setNetworkStatus(state.isConnected)
         })
-    }, [])
+    }, [searchTerm, pageNo])
     
     useEffect(() => {
         if (networkStatus) {
@@ -131,7 +131,11 @@ export default function SearchScreen() {
                     )}
                     keyExtractor={(item) => `${item.id}_${item.title}_${item.secret}`}
                     numColumns={numberOfColumn}
-                    onEndReached={() => setPageNo(pageNo + 1)}
+                    onEndReached={() => {
+                        if(networkStatus){
+                            setPageNo(pageNo + 1)
+                        }
+                    }}
                     onEndReachedThreshold={0.3}
                     key={numberOfColumn}
                     onRefresh={refreshPage}
