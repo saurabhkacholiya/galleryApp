@@ -7,11 +7,8 @@
 - Store data in AsyncStorage 
 - Options to change the grid to 2,3,4 Columns
 
-- ![#f03c15] ISSUE `#f03c15`
-> When using offline mode you have to ![#1589F0] ScrollDown To See the saved images`#1589F0`
-
-- ![#f03c15] <p color="red">ISSUE<p> `#f03c15`
-> When using offline mode you have to ![#1589F0] ScrollDown To See the saved images`#1589F0`
+### ISSUE
+> When using offline mode you have to ScrollDown To See the saved images 
 
 ## Prerequisite
 1. Node 
