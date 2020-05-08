@@ -7,16 +7,16 @@
 4. Store data in AsyncStorage 
 5. Options to change the grid to 2,3,4 Columns
 
-# Prerequisite
+## Prerequisite
 1. Node 
 2. expo cli
 
-# Step to run the project
+## Step to run the project
 1. clone the repo
 2. $ npm install
 3. $ expo start 
 
 ## demo image
-<img src="Images/grid_2.jpeg" width="100" height="100">
-<img src="Images/grid_3.jpeg" width="100" height="100">
-<img src="Images/grid_4.jpeg" width="100" height="100">
+<img src="Images/grid_2.jpeg" width="500" height="500">
+<img src="Images/grid_3.jpeg" width="500" height="500">
+<img src="Images/grid_4.jpeg" width="500" height="500">
