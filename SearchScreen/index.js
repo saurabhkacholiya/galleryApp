@@ -39,7 +39,7 @@ export default function SearchScreen() {
         NetInfo.fetch().then(state => {
             setNetworkStatus(state.isConnected)
         })
-    }, [searchTerm, pageNo])
+    }, [searchTerm])
     
     useEffect(() => {
         if (networkStatus) {

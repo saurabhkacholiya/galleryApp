@@ -7,6 +7,13 @@
 4. Store data in AsyncStorage 
 5. Options to change the grid to 2,3,4 Columns
 
+#- ![#f03c15] ISSUE `#f03c15`
+> When using offline mode you have to ![#1589F0] ScrollDown To See the saved images`#1589F0`
+
+# #- ![#f03c15] ISSUE `#f03c15`
+> When using offline mode you have to ![#1589F0] ScrollDown To See the saved images`#1589F0`
+
+
 ## Prerequisite
 1. Node 
 2. expo cli
