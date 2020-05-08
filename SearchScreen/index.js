@@ -60,7 +60,9 @@ export default function SearchScreen() {
             getItem("searchTerm")
                 .then(item => setResponse(deepCopy(item)))
                 .catch(error => console.log('error ', error))
-                .finally(() => setNumberOfColumn(2))
+                .finally(() => setTimeout(() => {
+                    setNumberOfColumn(2)
+                }, 500))
         }
 
         setRefreshing(false)
