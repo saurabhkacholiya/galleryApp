@@ -17,6 +17,6 @@
 3. $ expo start 
 
 ## demo image
-<img src="Images/grid_2.jpeg" width="500" height="500">
-<img src="Images/grid_3.jpeg" width="500" height="500">
-<img src="Images/grid_4.jpeg" width="500" height="500">
+<img src="Images/grid_2.jpeg" width="350" height="500">
+<img src="Images/grid_3.jpeg" width="350" height="500">
+<img src="Images/grid_4.jpeg" width="350" height="500">
