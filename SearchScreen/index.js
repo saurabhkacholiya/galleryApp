@@ -55,10 +55,7 @@ export default function SearchScreen() {
                 .catch((error) => { console.log("error => ", error) })
         } else {
             getItem("searchTerm")
-                .then(item => {
-                    setResponse([...item])
-                    setNumberOfColumn(2)
-                })
+                .then(item => setResponse([...item]))
                 .catch(error => console.log('error ', error))
         }
 
