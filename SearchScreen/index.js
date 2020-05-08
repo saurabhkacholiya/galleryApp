@@ -34,6 +34,7 @@ export default function SearchScreen() {
     const [pageNo, setPageNo] = useState(1)
     const [refreshing, setRefreshing] = useState(false)
     const [networkStatus, setNetworkStatus] = useState(true)
+    const [timeStamp, setTimeStamp] = useState(Date.now())
 
     useEffect(() => {
         NetInfo.fetch().then(state => {
@@ -55,7 +56,10 @@ export default function SearchScreen() {
                 .catch((error) => { console.log("error => ", error) })
         } else {
             getItem("searchTerm")
-                .then(item => setResponse([...item]))
+                .then(item => {
+                    setResponse([...item])
+                    setTimeStamp(Date.now())
+                })
                 .catch(error => console.log('error ', error))
         }
 
@@ -140,7 +144,7 @@ export default function SearchScreen() {
                     key={numberOfColumn}
                     onRefresh={refreshPage}
                     refreshing={refreshing}
-                    extraData={response}
+                    extraData={timeStamp}
                 />
             </View>
 
