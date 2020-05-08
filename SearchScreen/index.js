@@ -24,8 +24,9 @@ import { arr } from "./constant";
 const ITEM_WIDTH = Dimensions.get('window').width;
 const API_KEY = 'ddfc2122dc4634f03eec5673ea678f8a';
 
-
-
+const deepCopy = (data) => {
+    return JSON.parse(JSON.stringify(data))
+}
 
 export default function SearchScreen() {
     const [response, setResponse] = useState([])
@@ -49,13 +50,15 @@ export default function SearchScreen() {
 
             axios.get(urlEndpoint)
                 .then(item => {
-                    setResponse([...response, ...item.data.photos.photo])
-                    setItem("searchTerm", JSON.stringify([...response, ...item.data.photos.photo]))
+                    const newResponse = deepCopy(item.data.photos.photo)
+                    const existingResponse = deepCopy(response)
+                    setResponse([...newResponse, ...newResponse])
+                    setItem("searchTerm", JSON.stringify([...newResponse,...existingResponse]))
                 })
                 .catch((error) => { console.log("error => ", error) })
         } else {
             getItem("searchTerm")
-                .then(item => setResponse(JSON.parse(JSON.stringify(item))))
+                .then(item => setResponse(deepCopy(item)))
                 .catch(error => console.log('error ', error))
         }
 
@@ -140,7 +143,7 @@ export default function SearchScreen() {
                     key={numberOfColumn}
                     onRefresh={refreshPage}
                     refreshing={refreshing}
-                    extraData={response}
+                    extraData={[response,searchTerm,pageNo]}
                 />
             </View>
 
