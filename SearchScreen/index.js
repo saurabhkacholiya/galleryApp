@@ -55,9 +55,11 @@ export default function SearchScreen() {
                 .catch((error) => { console.log("error => ", error) })
         } else {
             getItem("searchTerm")
-                .then(item => setResponse([...item]))
+                .then(item => {
+                    setResponse(item)
+                    setPageNo(1)
+                })
                 .catch(error => console.log('error ', error))
-            setRefreshing(true)
         }
 
         setRefreshing(false)
