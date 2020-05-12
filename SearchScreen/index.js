@@ -22,7 +22,7 @@ import NetInfo from '@react-native-community/netinfo';
 import { arr } from "./constant";
 
 const ITEM_WIDTH = Dimensions.get('window').width;
-const API_KEY = 'ddfc2122dc4634f03eec5673ea678f8a';
+const API_KEY = ''; // add your key generated from flickr.
 
 const deepCopy = (data) => {
     return JSON.parse(JSON.stringify(data))
